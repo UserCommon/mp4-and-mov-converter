@@ -1,5 +1,5 @@
-import os
 #!/usr/bin/env python
+import os
 
 def main():
     print("Choose 1 or 2.")
