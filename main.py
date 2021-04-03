@@ -1,4 +1,5 @@
 import os
+#!/usr/bin/env python
 
 def main():
     print("Choose 1 or 2.")
