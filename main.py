@@ -1,21 +1,24 @@
 #!/usr/bin/env python
 import os
+import sys
+
+
+def help(name: str):
+    print("Sup!")
+    print('You need to write: {name} "FILENAME.mp4"'.format(name=name))
+    print("Then ffmpeg will convert your mp4 to mov for usage in davinci resolve!")
+
 
 def main():
-    print("Choose 1 or 2.")
-    print("1. Convert .mp4 to .mov")
-    print("2. Convert .mov to .mp4")
-
-    a = int(input())
-
-    print("Input path of file")
-
-    path = input()
-
-    if a == 1:
-        os.system("ffmpeg -i {path}.mp4 -vcodec mjpeg -q:v 2 -acodec pcm_s16be -q:a 0 -f mov {path}.mov".format(path=path))
+    args = sys.argv
+    name = args[0]
+    path = args[1]
+    
+    if path == "--help" or path == "-h":
+        help(name)
     else:
-        os.system("ffmpeg -i {path}.mov {path}.mp4".format(path=path))
+        mov_path = path.replace(".mp4", ".mov")
+        os.system("ffmpeg -i {path} -vcodec mjpeg -q:v 2 -acodec pcm_s16be -q:a 0 -f mov {mov_path}".format(path=path, mov_path=mov_path))
 
 
 if __name__ == "__main__":
