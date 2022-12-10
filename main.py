@@ -24,7 +24,7 @@ def main():
         print("File must be mp4 or mov!")
         exit(1)
     os.system(
-        "ffmpeg -i {path} -c copy -f mp4 {mov_path}".format(path=path, mov_path=mov_path))
+        "ffmpeg -i {path} -acodec pcm_s24le -vcodec copy {mov_path}".format(path=path, mov_path=mov_path))
 
 
 if __name__ == "__main__":
