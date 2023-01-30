@@ -12,19 +12,13 @@ def help(name: str):
 def main():
     args = sys.argv
     name = args[0]
-    path = args[1].lower()
-
+    path = args[1]
+    
     if path == "--help" or path == "-h":
         help(name)
-    elif path[-4::] == ".mp4":
-        mov_path = path.replace(".mp4", ".mov")
-    elif path[-4::] == ".mov":
-        mov_path = path.replace(".mov", ".mp4")
     else:
-        print("File must be mp4 or mov!")
-        exit(1)
-    os.system(
-        "ffmpeg -i {path} -acodec pcm_s24le -vcodec copy {mov_path}".format(path=path, mov_path=mov_path))
+        mov_path = path.replace(".mp4", ".mov")
+        os.system("ffmpeg -i {path} -vcodec mjpeg -q:v 2 -acodec pcm_s16be -q:a 0 -f mov {mov_path}".format(path=path, mov_path=mov_path))
 
 
 if __name__ == "__main__":
